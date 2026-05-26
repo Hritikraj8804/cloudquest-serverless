@@ -33,12 +33,41 @@ def calculate_rank(danger_level):
 
     return ranks.get(danger_level, "Unknown")
 
+REQUIRED_FIELDS = [
+    "heroName",
+    "heroClass",
+    "questType",
+    "dangerLevel",
+    "description"
+]
+
+def validate_request(data):
+
+    missing_fields = []
+
+    for field in REQUIRED_FIELDS:
+        if not data.get(field):
+            missing_fields.append(field)
+
+    return missing_fields
+
 
 def lambda_handler(event, context):
 
-    logger.info("CloudQuest request received")
+    logger.info("Quest request received")
 
     body = json.loads(event["body"])
+
+    missing = validate_request(body)
+
+    if missing:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({
+                "error": "Missing required fields",
+                "fields": missing
+            })
+        }
 
     danger_level = body["dangerLevel"]
 
