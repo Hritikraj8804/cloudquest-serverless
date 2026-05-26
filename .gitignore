@@ -5,7 +5,8 @@ __pycache__/
 # Terraform
 .terraform/
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
+crash.log
 
 # OS
 .DS_Store
