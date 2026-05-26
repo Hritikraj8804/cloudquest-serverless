@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudQuest Guild Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="ambient-background">
+        <div class="candlelight-glow left"></div>
+        <div class="candlelight-glow right"></div>
+    </div>
+
+    <div class="guild-container">
+
+        <!-- Header -->
+        <header class="guild-header">
+
+            <div class="guild-emblem">
+                <i class="fa-solid fa-dragon"></i>
+            </div>
+
+            <h1>CloudQuest Guild</h1>
+
+            <p class="motto">
+                "The Guild Never Refuses a Quest"
+            </p>
+
+            <div class="ornate-divider"></div>
+
+        </header>
+
+        <!-- Quest Form -->
+        <main class="quest-board">
+
+            <form id="questForm" class="quest-form">
+
+                <div class="form-grid">
+
+                    <!-- Hero Name -->
+                    <div class="form-group span-2">
+
+                        <label for="heroName">
+                            Hero Moniker
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-signature icon"></i>
+
+                            <input
+                                type="text"
+                                id="heroName"
+                                placeholder="Enter your legendary name..."
+                                required
+                                autocomplete="off">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Hero Class -->
+                    <div class="form-group">
+
+                        <label for="heroClass">
+                            Combat Class
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-shield-halved icon"></i>
+
+                            <select id="heroClass" required>
+
+                                <option value="" disabled selected>
+                                    Select your discipline...
+                                </option>
+
+                                <option value="Warrior">
+                                    ⚔ Warrior
+                                </option>
+
+                                <option value="Mage">
+                                    🧙 Mage
+                                </option>
+
+                                <option value="Archer">
+                                    🏹 Archer
+                                </option>
+
+                                <option value="Paladin">
+                                    🛡 Paladin
+                                </option>
+
+                                <option value="Rogue">
+                                    🗡 Rogue
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Quest Type -->
+                    <div class="form-group">
+
+                        <label for="questType">
+                            Quest Objective
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-scroll icon"></i>
+
+                            <select id="questType" required>
+
+                                <option value="" disabled selected>
+                                    Select contract type...
+                                </option>
+
+                                <option value="Dragon Hunt">
+                                    🐉 Dragon Hunt
+                                </option>
+
+                                <option value="Castle Defense">
+                                    🏰 Castle Defense
+                                </option>
+
+                                <option value="Treasure Hunt">
+                                    💎 Treasure Hunt
+                                </option>
+
+                                <option value="Forest Exploration">
+                                    🌲 Forest Exploration
+                                </option>
+
+                                <option value="Bandit Raid">
+                                    ⚔ Bandit Raid
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Danger Level -->
+                    <div class="form-group span-2">
+
+                        <label for="dangerLevel">
+                            Assessed Threat Level
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-skull icon"></i>
+
+                            <select id="dangerLevel" required>
+
+                                <option value="" disabled selected>
+                                    Evaluate the danger...
+                                </option>
+
+                                <option value="Low">
+                                    Low (Local Nuisance)
+                                </option>
+
+                                <option value="Medium">
+                                    Medium (Armed Resistance)
+                                </option>
+
+                                <option value="High">
+                                    High (Lethal Encounters)
+                                </option>
+
+                                <option value="Extreme">
+                                    Extreme (Near-Certain Death)
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group span-2">
+
+                        <label for="questDesc">
+                            Contract Details
+                        </label>
+
+                        <div class="input-wrapper align-top">
+
+                            <i class="fa-solid fa-feather icon"></i>
+
+                            <textarea
+                                id="questDesc"
+                                rows="5"
+                                placeholder="Detail the beast sighted, treasure rumored, or village in need..."
+                                required></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-footer">
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                        id="submitBtn">
+
+                        <span class="btn-text">
+                            Seal the Contract
+                        </span>
+
+                        <i class="fa-solid fa-stamp"></i>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </main>
+
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal"
+         class="modal-backdrop hidden">
+
+        <div class="modal-card">
+
+            <div class="modal-header">
+
+                <h2>
+                    ⚔ Contract Accepted
+                </h2>
+
+                <p class="subtitle">
+                    The Guild acknowledges your bravery.
+                </p>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="quest-result">
+
+                    <div class="result-item">
+                        <span>Quest ID</span>
+                        <strong id="questId"></strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Guild Rank</span>
+                        <strong id="guildRank"></strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Reward</span>
+                        <strong id="reward"></strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Status</span>
+                        <strong id="status"></strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Accepted At</span>
+                        <strong id="acceptedAt"></strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="closeBtn">
+
+                    Embark on Quest
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal"
+         class="modal-backdrop hidden">
+
+        <div class="modal-card error">
+
+            <div class="modal-header">
+
+                <h2>
+                    ⚠ Guild Scribes Encountered an Error
+                </h2>
+
+                <p class="subtitle">
+                    The contract could not be processed.
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="closeErrorBtn">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
