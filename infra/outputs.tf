@@ -13,3 +13,8 @@ output "lambda_name" {
 output "lambda_arn" {
   value = aws_lambda_function.cloudquest.arn
 }
+
+output "api_endpoint" {
+
+  value = aws_apigatewayv2_api.cloudquest.api_endpoint
+}
