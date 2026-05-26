@@ -2,9 +2,9 @@ resource "aws_lambda_function" "cloudquest" {
 
   function_name = "${var.project_name}-api"
 
-  filename = data.archive_file.lambda_zip.output_path
+  filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  
+
   role = aws_iam_role.lambda_role.arn
 
   handler = "handler.lambda_handler"

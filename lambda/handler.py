@@ -1,9 +1,27 @@
 import json
 import uuid
 import logging
+import os
+from datetime import datetime
 
+import boto3
+
+# Logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+# DynamoDB
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table(os.environ["TABLE_NAME"])
+
+# Required fields
+REQUIRED_FIELDS = [
+    "heroName",
+    "heroClass",
+    "questType",
+    "dangerLevel",
+    "description"
+]
 
 
 def generate_quest_id():
@@ -11,7 +29,6 @@ def generate_quest_id():
 
 
 def calculate_reward(danger_level):
-
     rewards = {
         "Low": 50,
         "Medium": 150,
@@ -23,7 +40,6 @@ def calculate_reward(danger_level):
 
 
 def calculate_rank(danger_level):
-
     ranks = {
         "Low": "Novice",
         "Medium": "Adventurer",
@@ -33,16 +49,8 @@ def calculate_rank(danger_level):
 
     return ranks.get(danger_level, "Unknown")
 
-REQUIRED_FIELDS = [
-    "heroName",
-    "heroClass",
-    "questType",
-    "dangerLevel",
-    "description"
-]
 
 def validate_request(data):
-
     missing_fields = []
 
     for field in REQUIRED_FIELDS:
@@ -52,20 +60,35 @@ def validate_request(data):
     return missing_fields
 
 
+def save_quest(item):
+    table.put_item(Item=item)
+
+
 def lambda_handler(event, context):
 
-    logger.info("Quest request received")
+    logger.info("CloudQuest request received")
 
-    body = json.loads(event["body"])
+    try:
+        body = json.loads(event["body"])
 
-    missing = validate_request(body)
+    except Exception:
+        logger.exception("Invalid request body")
 
-    if missing:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({
+                "error": "Invalid JSON payload"
+            })
+        }
+
+    missing_fields = validate_request(body)
+
+    if missing_fields:
         return {
             "statusCode": 400,
             "body": json.dumps({
                 "error": "Missing required fields",
-                "fields": missing
+                "fields": missing_fields
             })
         }
 
@@ -75,14 +98,43 @@ def lambda_handler(event, context):
 
     reward = calculate_reward(danger_level)
 
-    rank = calculate_rank(danger_level)
+    guild_rank = calculate_rank(danger_level)
+
+    quest = {
+        "questId": quest_id,
+        "heroName": body["heroName"],
+        "heroClass": body["heroClass"],
+        "questType": body["questType"],
+        "dangerLevel": danger_level,
+        "description": body["description"],
+        "reward": reward,
+        "guildRank": guild_rank,
+        "createdAt": datetime.utcnow().isoformat()
+    }
+
+    try:
+        save_quest(quest)
+
+        logger.info(
+            f"Quest {quest_id} successfully saved to DynamoDB"
+        )
+
+    except Exception:
+        logger.exception("Failed to save quest")
+
+        return {
+            "statusCode": 500,
+            "body": json.dumps({
+                "error": "Failed to save quest"
+            })
+        }
 
     return {
         "statusCode": 200,
         "body": json.dumps({
             "questId": quest_id,
             "reward": reward,
-            "guildRank": rank,
+            "guildRank": guild_rank,
             "message": "Quest accepted by the guild"
         })
     }
