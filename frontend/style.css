@@ -1,0 +1,293 @@
+:root {
+    /* AAA Dark Fantasy Palette */
+    --bg-deep: #0a0806;
+    --panel-bg: rgba(22, 17, 13, 0.85);
+    --panel-border: rgba(191, 149, 90, 0.3);
+    
+    --gold-primary: #d4af37;
+    --gold-bright: #fceea7;
+    --gold-muted: #8c734b;
+    
+    --text-main: #e8e2d9;
+    --text-muted: #a39b8e;
+    
+    --danger-red: #8b2323;
+    
+    /* Fonts */
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-ui: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Atmospheric Lighting */
+.ambient-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(circle at center, #1a1410 0%, var(--bg-deep) 100%);
+}
+
+.candlelight-glow {
+    position: absolute;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    animation: flicker 8s infinite alternate ease-in-out;
+}
+.candlelight-glow.left { top: -10%; left: -10%; }
+.candlelight-glow.right { bottom: -10%; right: -10%; animation-delay: -3s; }
+
+.guild-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* Elegant Header */
+.guild-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.guild-emblem {
+    font-size: 2.5rem;
+    color: var(--gold-primary);
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+}
+
+.guild-header h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.motto {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold-muted);
+}
+
+.ornate-divider {
+    height: 1px;
+    width: 60%;
+    margin: 20px auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    position: relative;
+}
+.ornate-divider::after {
+    content: '♦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold-primary);
+    font-size: 0.8rem;
+    background: var(--bg-deep);
+    padding: 0 10px;
+}
+
+/* Form Panel */
+.quest-board {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+.span-2 { grid-column: span 2; }
+
+/* Accessible UI Inputs */
+.form-group label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(140, 115, 75, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper.align-top { align-items: flex-start; }
+
+.input-wrapper .icon {
+    padding: 14px;
+    color: var(--gold-muted);
+    font-size: 1rem;
+}
+
+.input-wrapper input, .input-wrapper select, .input-wrapper textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 14px 14px 14px 0;
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+}
+
+.input-wrapper textarea { resize: vertical; min-height: 90px; }
+.input-wrapper input:focus, .input-wrapper select:focus, .input-wrapper textarea:focus { outline: none; }
+select option { background-color: var(--bg-deep); color: var(--text-main); }
+
+/* UX: Clear focus states */
+.input-wrapper:focus-within {
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 1px var(--gold-primary), 0 0 15px rgba(212, 175, 55, 0.1);
+}
+.input-wrapper:focus-within .icon { color: var(--gold-primary); }
+
+/* Buttons */
+.form-footer { margin-top: 35px; display: flex; justify-content: flex-end; }
+
+.btn-primary, .btn-secondary {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(180deg, var(--gold-primary) 0%, #aa8724 100%);
+    border: 1px solid #fceea7;
+    color: #1a1410;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--gold-muted);
+    color: var(--gold-primary);
+    width: 100%;
+    justify-content: center;
+}
+.btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold-bright);
+}
+
+/* Modal UI */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 8, 6, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+.modal-backdrop.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 450px;
+    background: var(--panel-bg);
+    border: 1px solid var(--gold-primary);
+    border-radius: 6px;
+    padding: 35px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.15);
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.modal-backdrop.hidden .modal-card { transform: scale(0.95); }
+
+.modal-header { text-align: center; margin-bottom: 30px; }
+.modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--gold-bright);
+    margin-bottom: 5px;
+}
+.modal-header .subtitle { color: var(--gold-muted); font-size: 0.95rem; }
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(140, 115, 75, 0.3);
+}
+.data-row:last-child { border-bottom: none; }
+.data-row .label { color: var(--text-muted); font-weight: 500; }
+.data-row .value { color: var(--text-main); font-weight: 600; text-align: right; }
+.data-row .code { font-family: monospace; letter-spacing: 1px; color: var(--gold-muted); background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; }
+.data-row .highlight { color: var(--gold-primary); font-size: 1.1rem; }
+
+.modal-footer { margin-top: 30px; }
+
+/* Animations */
+@keyframes flicker {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+@media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; }
+    .quest-board { padding: 25px; }
+    .guild-header h1 { font-size: 2.2rem; }
+}
