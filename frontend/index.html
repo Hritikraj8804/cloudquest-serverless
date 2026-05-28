@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Background Effects -->
@@ -60,11 +63,7 @@
 
                             <i class="fa-solid fa-signature icon"></i>
 
-                            <input
-                                type="text"
-                                id="heroName"
-                                placeholder="Enter your legendary name..."
-                                required
+                            <input type="text" id="heroName" placeholder="Enter your legendary name..." required
                                 autocomplete="off">
 
                         </div>
@@ -207,9 +206,7 @@
 
                             <i class="fa-solid fa-feather icon"></i>
 
-                            <textarea
-                                id="questDesc"
-                                rows="5"
+                            <textarea id="questDesc" rows="5"
                                 placeholder="Detail the beast sighted, treasure rumored, or village in need..."
                                 required></textarea>
 
@@ -221,10 +218,7 @@
 
                 <div class="form-footer">
 
-                    <button
-                        type="submit"
-                        class="btn-primary"
-                        id="submitBtn">
+                    <button type="submit" class="btn-primary" id="submitBtn">
 
                         <span class="btn-text">
                             Seal the Contract
@@ -243,8 +237,7 @@
     </div>
 
     <!-- Success Modal -->
-    <div id="successModal"
-         class="modal-backdrop hidden">
+    <div id="successModal" class="modal-backdrop hidden">
 
         <div class="modal-card">
 
@@ -295,10 +288,7 @@
 
             <div class="modal-footer">
 
-                <button
-                    type="button"
-                    class="btn-secondary"
-                    id="closeBtn">
+                <button type="button" class="btn-secondary" id="closeBtn">
 
                     Embark on Quest
 
@@ -311,8 +301,7 @@
     </div>
 
     <!-- Error Modal -->
-    <div id="errorModal"
-         class="modal-backdrop hidden">
+    <div id="errorModal" class="modal-backdrop hidden">
 
         <div class="modal-card error">
 
@@ -330,10 +319,7 @@
 
             <div class="modal-footer">
 
-                <button
-                    type="button"
-                    class="btn-secondary"
-                    id="closeErrorBtn">
+                <button type="button" class="btn-secondary" id="closeErrorBtn">
 
                     Try Again
 
@@ -345,7 +331,9 @@
 
     </div>
 
+    <script src="config.js"></script>
     <script src="app.js"></script>
 
 </body>
+
 </html>
