@@ -87,6 +87,17 @@ resource "aws_s3_object" "js" {
   content_type = "application/javascript"
 }
 
+resource "aws_s3_object" "rpg_background" {
+
+  bucket = aws_s3_bucket.frontend.id
+
+  key = "rpg_background.png"
+
+  source = "../frontend/rpg_background.png"
+
+  content_type = "image/png"
+}
+
 resource "aws_s3_object" "config" {
 
   bucket = aws_s3_bucket.frontend.id
