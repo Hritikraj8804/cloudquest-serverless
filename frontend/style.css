@@ -182,6 +182,7 @@ body {
     font-size: 1rem;
 }
 
+
 input,
 select,
 textarea {
@@ -197,6 +198,33 @@ textarea {
     padding: 14px 14px 14px 0;
 
     font-family: inherit;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 40px !important;
+    cursor: pointer;
+}
+
+/* Placeholder styling for select elements when the placeholder option is selected */
+select.placeholder-selected {
+    color: #8f8f8f;
+}
+
+/* Specific option styling for dark mode consistency */
+select option {
+    background-color: var(--card);
+    color: var(--text);
+}
+
+select option[value=""] {
+    color: #8f8f8f;
 }
 
 textarea {

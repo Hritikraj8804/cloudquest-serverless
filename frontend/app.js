@@ -120,3 +120,30 @@ window.addEventListener("click", (event) => {
     }
 
 });
+
+// Dynamic Select Placeholder Text Color Handler
+const selectElements = document.querySelectorAll("select");
+selectElements.forEach((select) => {
+    const updateSelectColor = () => {
+        if (select.value === "") {
+            select.classList.add("placeholder-selected");
+        } else {
+            select.classList.remove("placeholder-selected");
+        }
+    };
+
+    // Initial check
+    updateSelectColor();
+
+    // Event listener for user change
+    select.addEventListener("change", updateSelectColor);
+});
+
+// Reset color to placeholder style when the form is reset
+form.addEventListener("reset", () => {
+    setTimeout(() => {
+        selectElements.forEach((select) => {
+            select.classList.add("placeholder-selected");
+        });
+    }, 0);
+});
