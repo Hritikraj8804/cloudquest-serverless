@@ -86,3 +86,18 @@ resource "aws_s3_object" "js" {
 
   content_type = "application/javascript"
 }
+
+resource "aws_s3_object" "config" {
+
+  bucket = aws_s3_bucket.frontend.id
+
+  key = "config.js"
+
+  source = "../frontend/config.js"
+
+  content_type = "application/javascript"
+
+  depends_on = [
+    local_file.frontend_config
+  ]
+}

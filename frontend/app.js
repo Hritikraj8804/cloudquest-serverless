@@ -1,4 +1,8 @@
-const API_URL = "https://vvob9qinzd.execute-api.ap-south-1.amazonaws.com/quests";
+const API_URL = window.CONFIG.API_URL;
+
+if (!window.CONFIG?.API_URL) {
+    throw new Error("API URL not configured");
+}
 
 const form = document.getElementById("questForm");
 const submitBtn = document.getElementById("submitBtn");
