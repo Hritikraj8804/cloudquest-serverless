@@ -63,6 +63,8 @@ resource "aws_s3_object" "index" {
   source = "../frontend/index.html"
 
   content_type = "text/html"
+
+  etag = filemd5("../frontend/index.html")
 }
 
 resource "aws_s3_object" "css" {
@@ -74,6 +76,8 @@ resource "aws_s3_object" "css" {
   source = "../frontend/style.css"
 
   content_type = "text/css"
+
+  etag = filemd5("../frontend/style.css")
 }
 
 resource "aws_s3_object" "js" {
@@ -85,4 +89,34 @@ resource "aws_s3_object" "js" {
   source = "../frontend/app.js"
 
   content_type = "application/javascript"
+
+  etag = filemd5("../frontend/app.js")
+}
+
+resource "aws_s3_object" "rpg_background" {
+
+  bucket = aws_s3_bucket.frontend.id
+
+  key = "rpg_background.png"
+
+  source = "../frontend/rpg_background.png"
+
+  content_type = "image/png"
+
+  etag = filemd5("../frontend/rpg_background.png")
+}
+
+resource "aws_s3_object" "config" {
+
+  bucket = aws_s3_bucket.frontend.id
+
+  key = "config.js"
+
+  source = "../frontend/config.js"
+
+  content_type = "application/javascript"
+
+  depends_on = [
+    local_file.frontend_config
+  ]
 }
