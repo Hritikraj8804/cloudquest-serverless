@@ -116,8 +116,6 @@ resource "aws_s3_object" "config" {
 
   content_type = "application/javascript"
 
-  etag = filemd5("../frontend/config.js")
-
   depends_on = [
     local_file.frontend_config
   ]
