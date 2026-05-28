@@ -1,51 +1,68 @@
 # ⚔ CloudQuest Guild Portal
 
-CloudQuest is a serverless fantasy-themed quest management platform built on AWS.
+![CloudQuest Banner](docs/screenshots/banner.jpg)
 
-Users can submit quests through a web interface, which are processed by AWS Lambda and stored in DynamoDB through API Gateway.
+**CloudQuest** is a premium, serverless fantasy-themed quest contract management platform built entirely on AWS. Aspiring adventurers can draft quest contracts, review dynamically calculated guild stats, submit contracts to the Guild, and view their confirmed parchment scrolls—all powered by a fast, event-driven serverless backend.
 
 ---
 
-## 🚀 Architecture
+## 🎨 Premium RPG Game UI/UX Features
+
+We have transformed this portal from a standard form into an immersive fantasy RPG interface:
+- **Cinematic Visuals**: Dark fantasy aesthetics powered by Google Fonts (*Cinzel* and *Cormorant Garamond*), custom borders, and a custom background texture.
+- **Dynamic Hero Stats Card**: An interactive stats card (💪 Strength, ✨ Magic, ⚡ Agility) that dynamically scales and animates depending on the selected **Combat Class** (Warrior, Mage, Archer, Paladin, Rogue).
+- **Interactive Live Scroll**: A parchment-styled preview that synchronizes in real-time as the contract details, danger levels, and payouts are entered.
+- **Web Audio API Synth Engine**: Play custom sound effects generated in the browser for UI interactions (soft ticks on hover, high-pitched selections on clicks, and epic fanfares on submission success).
+- **Gold Coin Rain Particle System**: An interactive canvas-based animation that triggers a shower of gold coins upon contract approval.
+- **Wax Seal Stamp Modal**: A realistic, animated SVG wax seal stamp that "slams" onto the final quest certificate.
+
+---
+
+## 📸 Portal Walkthrough
+
+### 🏛 The Guild Hall (Main Portal)
+Fill out your character details, select your combat class, choose your quest objectives, and review your live parchment preview:
+![Main Portal UI](docs/screenshots/form.jpg)
+
+### 📜 Active Quest Contract & Confirmed Seal
+Upon submitting, watch the gold rain down and inspect your sealed quest contract:
+![Wax Seal & Contract Details](docs/screenshots/contract%20.jpg)
+
+### 🗄 Serverless Storage (DynamoDB)
+Contracts are instantly processed by Lambda and persisted in the DynamoDB table:
+![DynamoDB Console Records](docs/screenshots/Dynomodb-table.jpg)
+
+---
+
+## 🚀 Architecture Details
+
+The system leverages a decoupled, 100% serverless infrastructure on AWS, provisioned entirely via Infrastructure as Code (Terraform):
 
 ```text
-User
-  ↓
-S3 Static Website
-  ↓
-API Gateway
-  ↓
-Lambda
-  ↓
-DynamoDB
+🧙 Adventurer (Browser) ──> Amazon S3 Static Website
+        │
+        └── (POST /submit-quest) ──> Amazon API Gateway (V2 HTTP API)
+                                              │
+                                              └──> AWS Lambda (Python Handler)
+                                                        │
+                                                        ├──> Write Logs to CloudWatch
+                                                        └──> Save Contract to Amazon DynamoDB
 ```
 
----
-
-## ✨ Features
-
-- Fantasy-themed Guild Portal UI
-- Quest submission workflow
-- Serverless backend
-- Automatic Quest ID generation
-- Reward calculation
-- Guild Rank assignment
-- DynamoDB persistence
-- Infrastructure as Code with Terraform
-- API Gateway integration
+For a comprehensive explanation of components, secure IAM policies, and system data flow diagrams, check the [Architecture Documentation](docs/architecture.md).
 
 ---
 
-## 🛠 AWS Services Used
+## 🛠 AWS Services Provisioned
 
 | Service | Purpose |
-|----------|----------|
-| AWS Lambda | Serverless business logic |
-| API Gateway | HTTP API endpoint |
-| DynamoDB | NoSQL data storage |
-| IAM | Secure permissions |
-| S3 | Static website hosting |
-| CloudWatch | Logging and monitoring |
+| :--- | :--- |
+| **AWS Lambda** | Stateless business logic (Python 3.x), calculations & data validation |
+| **API Gateway** | Light, scalable HTTP endpoint with automated CORS mapping |
+| **DynamoDB** | NoSQL single-table persistence tracking all quest metadata |
+| **S3** | High-availability static website hosting for the RPG client |
+| **IAM** | Least-privilege execution roles securing the Lambda microVM |
+| **CloudWatch** | Integrated logs and metrics for system monitoring |
 
 ---
 
@@ -53,126 +70,41 @@ DynamoDB
 
 ```text
 cloudquest-serverless/
+├── docs/                      # Technical documentation & walkthrough assets
+│   ├── screenshots/           # Portal image screenshots
+│   ├── architecture.md        # Deep dive into data flow and security
+│   └── deployment.md          # Comprehensive deployment steps
 │
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
+├── frontend/                  # Immersive RPG UI code
+│   ├── index.html             # UI Layout and parchment modal
+│   ├── style.css              # Custom styling, fonts, and keyframe animations
+│   ├── app.js                 # Dynamic JS state, Synth audio, and coin physics
+│   ├── config.js              # Dynamically updated backend endpoints
+│   └── rpg_background.png     # Custom theme background asset
 │
-├── infra/
-│   ├── provider.tf
-│   ├── versions.tf
-│   ├── variables.tf
-│   ├── outputs.tf
-│   ├── dynamodb.tf
-│   ├── iam.tf
-│   ├── lambda.tf
-│   ├── api_gateway.tf
-│   └── s3.tf
+├── infra/                     # Infrastructure as Code (Terraform)
+│   ├── provider.tf            # Provider configuration
+│   ├── s3.tf                  # Frontend bucket and object deployment with etags
+│   ├── dynamodb.tf            # Quest requests table definition
+│   ├── lambda.tf              # Serverless execution logic configuration
+│   └── api_gateway.tf         # HTTP gateway setup and routes
 │
-├── lambda/
-│   └── handler.py
-│
-└── README.md
+└── lambda/                    # Backend API Handlers
+    └── handler.py             # Python script generating IDs, rewards, and ranks
 ```
 
 ---
 
-## ⚙️ Infrastructure Provisioning
+## ⚙️ How to Deploy & Run
 
-Initialize Terraform:
+Deploying CloudQuest to your AWS account takes less than 3 minutes using Terraform. 
 
-```bash
-terraform init
-```
-
-Validate:
-
-```bash
-terraform validate
-```
-
-Plan:
-
-```bash
-terraform plan
-```
-
-Deploy:
-
-```bash
-terraform apply
-```
+For step-by-step commands, configurations for local development, and troubleshooting advice, check out the [Deployment & Operations Guide](docs/deployment.md).
 
 ---
 
-## 📡 API Example
+## 👨‍💻 Author & Project Info
 
-### Request
-
-```json
-{
-  "heroName": "Hritik",
-  "heroClass": "Warrior",
-  "questType": "Dragon Hunt",
-  "dangerLevel": "Extreme",
-  "description": "Ancient dragon attacking villages"
-}
-```
-
-### Response
-
-```json
-{
-  "questId": "QST-D7F05FE3",
-  "reward": 500,
-  "guildRank": "Legendary",
-  "status": "PENDING"
-}
-```
-
----
-
-## 🗄 DynamoDB Record
-
-```json
-{
-  "questId": "QST-D7F05FE3",
-  "heroName": "Hritik",
-  "heroClass": "Warrior",
-  "questType": "Dragon Hunt",
-  "dangerLevel": "Extreme",
-  "reward": 500,
-  "guildRank": "Legendary",
-  "status": "PENDING"
-}
-```
-
----
-
-## 🔒 Security
-
-- IAM least-privilege permissions
-- Lambda execution role
-- API Gateway to Lambda permissions
-- Terraform-managed infrastructure
-
----
-
-## 📈 Future Improvements
-
-- CloudFront CDN
-- Custom domain
-- GitHub Actions CI/CD
-- Terraform Remote State
-- CloudWatch Dashboard
-- Authentication with Cognito
-- Quest Management Dashboard
-
----
-
-## 👨‍💻 Author
-
-Hritik Raj
-
-Built as part of a DevOps and Cloud Engineering project portfolio using AWS and Terraform.
+- **Author**: Hritik Raj
+- **Project**: Portfolio piece highlighting serverless AWS architectures, Terraform automation, and premium frontend UI design.
+- **License**: MIT
