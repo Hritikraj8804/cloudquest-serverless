@@ -2,7 +2,6 @@
 
 This document describes the system architecture and data flow for the **CloudQuest Serverless Guild Portal**. It covers the serverless AWS components, data flow lifecycle, security controls, and design decisions that enable real-time quest management.
 
----
 
 ## 🗺 Architecture Overview
 
@@ -22,7 +21,6 @@ graph TD
     end
 ```
 
----
 
 ## 🔄 End-to-End Data Flow
 
@@ -60,7 +58,6 @@ When a user submits a quest contract through the Guild Portal, the request goes 
 5. **Client Rendering**:
    - The frontend receives the response, plays a victory sound theme, triggers a **canvas particle explosion** of falling gold coins, and stamps the parchment with an animated **Wax Seal** modal containing the confirmed quest contract details.
 
----
 
 ## 📂 Core Components
 
@@ -87,7 +84,6 @@ When a user submits a quest contract through the Guild Portal, the request goes 
 - Primary Key (Partition Key): `questId` (String).
 - Schema-less design storing all quest metadata (Hero name, class, danger level, reward, status, timestamps, etc.).
 
----
 
 ## 🔒 Security & Access Control
 

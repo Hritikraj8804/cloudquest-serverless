@@ -4,7 +4,6 @@
 
 **CloudQuest** is a premium, serverless fantasy-themed quest contract management platform built entirely on AWS. Aspiring adventurers can draft quest contracts, review dynamically calculated guild stats, submit contracts to the Guild, and view their confirmed parchment scrolls—all powered by a fast, event-driven serverless backend.
 
----
 
 ## 🎨 Premium RPG Game UI/UX Features
 
@@ -16,7 +15,6 @@ We have transformed this portal from a standard form into an immersive fantasy R
 - **Gold Coin Rain Particle System**: An interactive canvas-based animation that triggers a shower of gold coins upon contract approval.
 - **Wax Seal Stamp Modal**: A realistic, animated SVG wax seal stamp that "slams" onto the final quest certificate.
 
----
 
 ## 📸 Portal Walkthrough
 
@@ -32,7 +30,6 @@ Upon submitting, watch the gold rain down and inspect your sealed quest contract
 Contracts are instantly processed by Lambda and persisted in the DynamoDB table:
 ![DynamoDB Console Records](docs/screenshots/Dynomodb-table.jpg)
 
----
 
 ## 🚀 Architecture Details
 
@@ -51,7 +48,6 @@ The system leverages a decoupled, 100% serverless infrastructure on AWS, provisi
 
 For a comprehensive explanation of components, secure IAM policies, and system data flow diagrams, check the [Architecture Documentation](docs/architecture.md).
 
----
 
 ## 🛠 AWS Services Provisioned
 
@@ -64,7 +60,6 @@ For a comprehensive explanation of components, secure IAM policies, and system d
 | **IAM** | Least-privilege execution roles securing the Lambda microVM |
 | **CloudWatch** | Integrated logs and metrics for system monitoring |
 
----
 
 ## 📂 Project Structure
 
@@ -93,7 +88,6 @@ cloudquest-serverless/
     └── handler.py             # Python script generating IDs, rewards, and ranks
 ```
 
----
 
 ## ⚙️ How to Deploy & Run
 
@@ -101,7 +95,6 @@ Deploying CloudQuest to your AWS account takes less than 3 minutes using Terrafo
 
 For step-by-step commands, configurations for local development, and troubleshooting advice, check out the [Deployment & Operations Guide](docs/deployment.md).
 
----
 
 ## 👨‍💻 Author & Project Info
 

@@ -2,7 +2,6 @@
 
 This document describes how to deploy, configure, run, and destroy the **CloudQuest Serverless Guild Portal** using Terraform and AWS.
 
----
 
 ## 📋 Prerequisites
 
@@ -16,7 +15,6 @@ Before deploying, ensure you have the following installed and configured on your
 3. **Web Browser**:
    - For testing the deployed frontend (Chrome, Firefox, Edge, etc.).
 
----
 
 ## ⚙️ Initial Infrastructure Provisioning
 
@@ -57,7 +55,6 @@ lambda_name = "cloudquest-api"
 website_url = "cloudquest-frontend-643a8783.s3-website.ap-south-1.amazonaws.com"
 ```
 
----
 
 ## 📡 Dynamic Configuration & The Deployment Loop
 
@@ -74,7 +71,6 @@ If you make modifications to:
 
 Simply rerun `terraform apply` from the `infra/` folder. Terraform will detect the content change, compute a new MD5 hash, and upload only the modified files to S3 immediately.
 
----
 
 ## 💻 Local Development & Testing
 
@@ -94,7 +90,6 @@ You can run and test the RPG frontend locally while utilizing the live, serverle
 3. **Open Browser**:
    Navigate to `http://localhost:8000` to interact with the game. Forms submitted here will send payloads directly to your live AWS Lambda backend.
 
----
 
 ## 🗑 Cleaning Up (Teardown)
 
@@ -106,7 +101,6 @@ To avoid incurring ongoing charges for active AWS resources, you can destroy all
    ```
 2. Confirm that all S3 objects, DynamoDB tables, Lambda functions, and API Gateways are successfully deleted.
 
----
 
 ## 🛠 Troubleshooting
 
